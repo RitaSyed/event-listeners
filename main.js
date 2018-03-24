@@ -56,3 +56,56 @@ const students = [
         catchPhrase: "Multi-channelled solution-oriented artificial intelligence"
     }
 ];
+
+const PrintToDom = (domString, divId) => {
+  const PrintTo = document.getElementById(divId);
+  PrintTo.innerHTML = domString;
+};
+
+const buildDomString = (studentArray) => {
+  let domString = "";
+  studentArray.forEach((student) => {
+    domString += `<div class="card">`;
+    domString +=    `<h1>${student.firstName} ${student.lastName}</h1>`;
+    domString +=    `<h3>${student.catchPhrase}</h3>`;
+    domString +=    `<img src="${student.avatar}" alt="">`;
+    domString +=    `<button class="card-button">Brought Pie</button>`;
+    domString += `</div>`;
+  });
+  PrintToDom(domString, "card-holder");
+}
+
+buildDomString (students);
+
+
+
+const addAllEventListeners = () => {
+  const allTheButtons = document.getElementsByClassName("card-button");
+
+  for (let i=0; i<allTheButtons.length; i++){
+  allTheButtons[i].addEventListener('click', changeNameToGreen);
+  }
+};
+
+const changeNameToGreen = (e) => {
+  const nameOfStudent = e.target.parentNode.children[0];
+  nameOfStudent.classList.add('green');
+};
+
+const startApplication = () => {
+  buildDomString(students);
+  addAllEventListeners();
+};
+
+startApplication();
+
+// const cardHolder = document.getElementById("card-holder");
+// const card  = document.getElementsByClassName("card");
+// cardHolder.addEventListener("click", (e) => {
+//   if(e.target.className == "card-button"){
+    
+ 
+//     console.log(cardHolder.children);
+//   }
+//   // console.log(card.children);
+// });
